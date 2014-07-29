@@ -5,6 +5,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
@@ -27,7 +28,12 @@ public class Notifier {
 
     private static final int NOTIFICATION_STATE = 1;
 
-    public static void notify(Context context, NetworkInfo info){
+    public static void notify(Context context){
+
+        ConnectivityManager cm = (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo info = cm.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+
+
         if (info == null) return;
 
         // Notification manager

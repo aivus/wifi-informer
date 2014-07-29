@@ -17,10 +17,7 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
 //        setContentView(R.layout.activity_main);
 
-        // Connectivity manager
-        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo info = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
-        Notifier.notify(getApplicationContext(), info);
+        Notifier.notify(this);
 
         finish();
     }
