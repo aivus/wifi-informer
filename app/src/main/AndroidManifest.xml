@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="ua.pp.appdev.wifiinformer" >
+    package="ua.pp.appdev.wifiinfo" >
 
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
@@ -9,11 +9,11 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
+        android:icon="@drawable/ic_action_network_wifi"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".MainActivity"
+            android:name="ua.pp.appdev.wifiinfo.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,7 +24,7 @@
         <receiver
             android:enabled="true"
             android:exported="false"
-            android:name=".WifiStateChangedReceiver">
+            android:name="ua.pp.appdev.wifiinfo.WifiStateChangedReceiver">
             <intent-filter>
                 <action android:name = "android.intent.action.BOOT_COMPLETED"/>
                 <action android:name = "android.net.wifi.STATE_CHANGE" />

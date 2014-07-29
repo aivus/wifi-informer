@@ -1,4 +1,4 @@
-package ua.pp.appdev.wifiinformer;
+package ua.pp.appdev.wifiinfo;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;

@@ -1,4 +1,4 @@
-package ua.pp.appdev.wifiinformer;
+package ua.pp.appdev.wifiinfo;
 
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -28,12 +28,13 @@ public class Notifier {
     private static final int NOTIFICATION_STATE = 1;
 
     public static void notify(Context context, NetworkInfo info){
+        if (info == null) return;
 
         // Notification manager
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
         // Check connect
-        if (info != null && info.isConnected()) {
+        if (info.isConnected()) {
             WifiManager wifiMgr = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
             WifiInfo wifiInfo = wifiMgr.getConnectionInfo();
             String ssid = wifiInfo.getSSID();
@@ -42,9 +43,15 @@ public class Notifier {
             // Open wifi settings intent
             PendingIntent wifiSettingsIntent = PendingIntent.getActivity(context, 0, new Intent(Settings.ACTION_WIFI_SETTINGS), 0);
 
+            int numberOfLevels = 10;
+            int level = WifiManager.calculateSignalLevel(wifiInfo.getRssi(), numberOfLevels);
+
+            String title = "SSID: " + ssid;
+            String text = "IP: " + ipAddress + " | Signal: " + level + "/" + numberOfLevels;
+
             Notification notification = new Notification.Builder(context)
-                    .setContentTitle("SSID: " + ssid)
-                    .setContentText("IP: " + ipAddress)
+                    .setContentTitle(title)
+                    .setContentText(text)
                     .setContentIntent(wifiSettingsIntent)
                     .setSmallIcon(R.drawable.ic_action_network_wifi)
                     .setAutoCancel(false)
